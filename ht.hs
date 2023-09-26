@@ -78,4 +78,18 @@ clone src turns = cloneHelper [] src turns turns
 
 xZipWith f [] _ = []
 xZipWith f _ [] = []
-xZipWith f (x : xt) (y : yt) = [f(x, y)] ++ (xZipWith f xt yt)
+xZipWith f (x : xt) (y : yt) = [f x y] ++ xZipWith f xt yt
+
+--xGenFibHelper :: [a] -> [a] -> a  -> a -> [a]
+--xGenFibHelper state _ _ 0 = state
+--xGenFibHelper state (x : xt) num left = xGenFibHelper (state ++ [num]) (xt ++ [num]) (num * 2 - x) (left - 1)
+
+-- xGenFib :: [a] -> a -> [a]
+-- xGenFib start n
+   -- | num < (length start) = take n start
+   -- | otherwise = xGenFibHelper start start ss leftlen
+   -- where
+   --     ss = sum start
+   --     leftlen = (length start) - n
+
+
