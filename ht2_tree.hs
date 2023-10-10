@@ -1,14 +1,4 @@
--- data Tree a = Leaf a | Node a (Tree a) (Tree a)
-
---instance Show a => Show (Tree a) where
---  show (Leaf x) = "Leaf " ++ show x
---  show (Node left x right) =
---  "Node (" ++ show left ++ ") " ++ show x ++ " (" ++ show right ++ ")"
-
---createLeaf a = Leaf a
---createTree 
-
-module Tree (MyTree(MyNil, MyNode)) where
+module Tree (MyTree(MyNil, MyNode), treeTraverseD, treeTraverseW) where
 data MyTree a 
     = MyNil 
     | MyNode a (MyTree a) (MyTree a)
