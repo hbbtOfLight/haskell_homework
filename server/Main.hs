@@ -34,8 +34,9 @@ main = do
       let endpoints =
             [ ("/", "Returns a hello message.")
             , ("/help", "Returns information about available endpoints.")
-            , ("/value/:k", "Returns the last value by key")
-            , ("/key/:k/:v", "Adds a key to the key-value list")
+            , ("/value/:k", "Returns the user by key (GET) or deletes it (DELETE)")
+            , ("/key", "Adds a user to the key-value map, their username used as key, content-type=json")
+            , ("/list/:limit", "takes :limit (random?) users from map")
             ]
 
       let helpMessage = formatEndpoints endpoints
@@ -51,6 +52,12 @@ main = do
         Nothing -> do
           status status404
           text (pack("Not found: " ++ username))
+    
+    delete "/value/:k" $ do
+      username <- param "k"
+      storage <- liftAndCatchIO $ readIORef storeRef
+      liftAndCatchIO $ modifyIORef' storeRef (Map.delete (username))
+
     
     get "/list/:limit" $ do
       limit <- param "limit"
